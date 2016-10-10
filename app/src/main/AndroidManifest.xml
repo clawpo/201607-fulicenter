@@ -3,6 +3,7 @@
           package="cn.ucai.fulicenter">
 
     <application
+        android:name=".FuLiCenterApplication"
         android:allowBackup="true"
         android:fullBackupContent="false"
         android:icon="@mipmap/launcher"
