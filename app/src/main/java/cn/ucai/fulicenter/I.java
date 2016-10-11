@@ -1,8 +1,10 @@
 package cn.ucai.fulicenter;
 
 
+import static cn.ucai.fulicenter.I.Boutique.IMAGE_URL;
+
 public interface I {
-    String SERVER_ROOT = "http://101.251.196.90:8000/FuLiCenterServer/Server";
+    String SERVER_ROOT = "http://101.251.196.90:8000/FuLiCenterServerV2.0/";
     /** 下拉刷新*/
     int ACTION_DOWNLOAD=0;
     /** 第一次下载*/
@@ -407,5 +409,13 @@ public interface I {
     String REQUEST_FIND_CHARGE = "findCharge";
     /** 支付请求*/
     String REQUEST_PAY="pay";
+
+    /** 下载精选首页图像的接口*/
+    String DOWNLOAD_BOUTIQUE_IMG_URL= I.SERVER_ROOT+
+            REQUEST_DOWNLOAD_BOUTIQUE_IMG+I.QUESTION+ IMAGE_URL+"=";
+
+    /** 下载商品相册图像的接口*/
+    String DOWNLOAD_ALBUM_IMG_URL= I.SERVER_ROOT+
+            REQUEST_DOWNLOAD_ALBUM_IMG+I.QUESTION+ IMAGE_URL+"=";
 
 }
