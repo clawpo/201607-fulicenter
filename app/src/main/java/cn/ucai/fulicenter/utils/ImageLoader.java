@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import cn.ucai.fulicenter.I;
+import cn.ucai.fulicenter.R;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -328,5 +330,29 @@ public class ImageLoader {
             mOkHttpClient=null;
             mCaches=null;
         }
+    }
+
+    public static void downloadAlbumImg(Context context,ImageView imageView,String thumb,boolean isDragging){
+        setImage(I.DOWNLOAD_ALBUM_IMG_URL+thumb,context,imageView,isDragging);
+    }
+    public static void downloadBoutiqueImg(Context context,ImageView imageView,String thumb,boolean isDragging){
+        setImage(I.DOWNLOAD_BOUTIQUE_IMG_URL+thumb,context,imageView,isDragging);
+    }
+    public static void downloadCategoryGroupImage(Context context,ImageView imageView,String thumb,boolean isDragging){
+        setImage(I.DOWNLOAD_CATEGORY_GROUP_IMG_URL+thumb,context,imageView,isDragging);
+    }
+    public static void downloadCategoryChildImage(Context context,ImageView imageView,String thumb,boolean isDragging){
+        setImage(I.DOWNLOAD_CATEGORY_CHILD_IMG_URL+thumb,context,imageView,isDragging);
+    }
+    public static void downloadGoodsThumb(Context context,ImageView imageView,String thumb,boolean isDragging){
+        setImage(I.DOWNLOAD_GOODS_IMG_URL+thumb,context,imageView,isDragging);
+    }
+
+    public static void setImage(String url,Context context,ImageView imageView,boolean isDragging){
+        ImageLoader.build(url)
+                .defaultPicture(R.drawable.nopic)
+                .imageView(imageView)
+                .setDragging(isDragging)
+                .showImage(context);
     }
 }
