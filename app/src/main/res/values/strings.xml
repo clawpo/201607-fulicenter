@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">FuLiCenter</string>
     <string name="Version_number_is_wrong">Version number is wrong</string>
+    <string name="now_refresh">now_refresh</string>
 </resources>
