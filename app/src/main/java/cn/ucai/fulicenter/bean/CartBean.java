@@ -9,7 +9,7 @@ public class CartBean implements Serializable {
     private int goodsId;
     private int count;
     private boolean isChecked;
-    private GoodDetailsBean goods;
+    private GoodsDetailsBean goods;
 
     public int getId() {
         return id;
@@ -51,11 +51,11 @@ public class CartBean implements Serializable {
         this.isChecked = checked;
     }
 
-    public GoodDetailsBean getGoods() {
+    public GoodsDetailsBean getGoods() {
         return goods;
     }
 
-    public void setGoods(GoodDetailsBean goods) {
+    public void setGoods(GoodsDetailsBean goods) {
         this.goods = goods;
     }
 

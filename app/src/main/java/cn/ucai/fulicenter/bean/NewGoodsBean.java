@@ -2,7 +2,7 @@ package cn.ucai.fulicenter.bean;
 
 import java.io.Serializable;
 
-public class NewGoodBean implements Serializable {
+public class NewGoodsBean implements Serializable {
 
     /**
      * id : 1

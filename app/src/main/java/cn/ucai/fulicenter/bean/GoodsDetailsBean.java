@@ -3,7 +3,7 @@ package cn.ucai.fulicenter.bean;
 import java.io.Serializable;
 import java.util.Arrays;
 
-public class GoodDetailsBean implements Serializable {
+public class GoodsDetailsBean implements Serializable {
 
     private int id;
     private int goodsId;
