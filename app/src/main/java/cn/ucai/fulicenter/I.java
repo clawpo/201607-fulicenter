@@ -1,8 +1,6 @@
 package cn.ucai.fulicenter;
 
 
-import static cn.ucai.fulicenter.I.Boutique.IMAGE_URL;
-
 public interface I {
     String SERVER_ROOT = "http://101.251.196.90:8000/FuLiCenterServerV2.0/";
     /** 下拉刷新*/
@@ -329,11 +327,13 @@ public interface I {
     /** 上传头像图片的类型：user_avatar或group_icon */
     String AVATAR_TYPE = "avatarType";
     /** 用户的账号或群组的环信id */
-    String NAME_OR_HXID                             =       "name_or_hxid";
+    String NAME_OR_HXID = "name_or_hxid";
     /** 客户端发送的获取服务端状态的请求 */
     String REQUEST_SERVERSTATUS = "getServerStatus";
     /** 客户端发送的新用户注册的请求 */
     String REQUEST_REGISTER = "register";
+    /** 下载图片通用的请求字段 */
+    String IMAGE_URL="imageurl";
     /** 客户端发送的取消注册的请求 */
     String REQUEST_UNREGISTER = "unregister";
     /** 客户端发送的用户登录请求 */
@@ -417,5 +417,17 @@ public interface I {
     /** 下载商品相册图像的接口*/
     String DOWNLOAD_ALBUM_IMG_URL= I.SERVER_ROOT+
             REQUEST_DOWNLOAD_ALBUM_IMG+I.QUESTION+ IMAGE_URL+"=";
+
+    /** 下载分类中大类图像的接口*/
+    String DOWNLOAD_CATEGORY_GROUP_IMG_URL= I.SERVER_ROOT+
+            REQUEST_DOWNLOAD_CATEGORY_GROUP_IMAGE+I.QUESTION+ IMAGE_URL+"=";
+
+    /** 下载分类中小类图像的接口*/
+    String DOWNLOAD_CATEGORY_CHILD_IMG_URL= I.SERVER_ROOT+
+            REQUEST_DOWNLOAD_CATEGORY_CHILD_IMAGE+I.QUESTION+ IMAGE_URL+"=";
+
+    /** 下载商品图像的接口*/
+    String DOWNLOAD_GOODS_IMG_URL= I.SERVER_ROOT+
+            REQUEST_DOWNLOAD_GOODS_THUMB+I.QUESTION+ IMAGE_URL+"=";
 
 }
