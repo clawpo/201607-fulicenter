@@ -339,6 +339,10 @@ public class ImageLoader {
         }
     }
 
+    public static void downloadImg(Context context,ImageView imageView,String thumb){
+        setImage(I.DOWNLOAD_IMG_URL+thumb,context,imageView,true);
+    }
+
     public static void downloadImg(Context context,ImageView imageView,String thumb,boolean isDragging){
         setImage(I.DOWNLOAD_IMG_URL+thumb,context,imageView,isDragging);
     }
