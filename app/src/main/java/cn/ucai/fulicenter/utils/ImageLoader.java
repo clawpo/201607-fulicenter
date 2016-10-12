@@ -104,7 +104,8 @@ public class ImageLoader {
                 switch (msg.what) {
                     case DOWNLOAD_ERROR:
                         if (bean.listener != null) {
-                            bean.listener.onError(bean.error);
+                            L.e("bean.error="+bean.error);
+                            bean.listener.onError(bean.error!=null?bean.error:"");
                         } else {
                             Log.e("main", bean.error);
                         }
