@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.BindView;
 import cn.ucai.fulicenter.FuLiCenterApplication;
 import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
@@ -34,30 +35,39 @@ import cn.ucai.fulicenter.views.SlideAutoLoopView;
 public class GoodsDetailsActivity extends BaseActivity {
     private final static String TAG = GoodsDetailsActivity.class.getSimpleName();
     GoodsDetailsActivity mContext;
-    ImageView ivShare;
-    ImageView ivCollect;
-    ImageView ivCart;
-    TextView tvCartCount;
-
-    TextView tvGoodEnglishName;
-    TextView tvGoodName;
-    TextView tvGoodPriceCurrent;
-    TextView tvGoodPriceShop;
-
-    SlideAutoLoopView mSlideAutoLoopView;
-    FlowIndicator mFlowIndicator;
-    WebView wvGoodBrief;
 
     int mGoodId;
     GoodsDetailsBean mGoodDetail;
 
     boolean isCollect;
     updateCartNumReceiver mReceiver;
+    @BindView(R.id.iv_good_share)
+    ImageView ivShare;
+    @BindView(R.id.iv_good_collect)
+    ImageView ivCollect;
+    @BindView(R.id.iv_good_cart)
+    ImageView ivCart;
+    @BindView(R.id.tv_cart_count)
+    TextView tvCartCount;
+    @BindView(R.id.tv_good_name_english)
+    TextView tvGoodEnglishName;
+    @BindView(R.id.tv_good_name)
+    TextView tvGoodName;
+    @BindView(R.id.tv_good_price_shop)
+    TextView tvGoodPriceShop;
+    @BindView(R.id.tv_good_price_current)
+    TextView tvGoodPriceCurrent;
+    @BindView(R.id.salv)
+    SlideAutoLoopView mSlideAutoLoopView;
+    @BindView(R.id.indicator)
+    FlowIndicator mFlowIndicator;
+    @BindView(R.id.wv_good_brief)
+    WebView wvGoodBrief;
 
     @Override
     protected void onCreate(Bundle arg0) {
-        super.onCreate(arg0);
         setContentView(R.layout.activity_good_details);
+        super.onCreate(arg0);
         mContext = this;
         initView();
         initData();
@@ -73,13 +83,13 @@ public class GoodsDetailsActivity extends BaseActivity {
     }
 
     private void initData() {
-        mGoodId = getIntent().getIntExtra(I.GoodsDetails.KEY_GOODS_ID,0);
-        Log.e(TAG,"mGoodId="+mGoodId);
-        if(mGoodId>0){
+        mGoodId = getIntent().getIntExtra(I.GoodsDetails.KEY_GOODS_ID, 0);
+        Log.e(TAG, "mGoodId=" + mGoodId);
+        if (mGoodId > 0) {
             NetDao.downloadGoodsDetails(mContext, mGoodId, new OkHttpUtils.OnCompleteListener<GoodsDetailsBean>() {
                 @Override
                 public void onSuccess(GoodsDetailsBean result) {
-                    if(result!=null){
+                    if (result != null) {
                         mGoodDetail = result;
                         showGoodDetails();
                     }
@@ -88,12 +98,12 @@ public class GoodsDetailsActivity extends BaseActivity {
                 @Override
                 public void onError(String error) {
                     finish();
-                    Toast.makeText(mContext,"获取商品详情数据失败！", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, "获取商品详情数据失败！", Toast.LENGTH_SHORT).show();
                 }
             });
-        }else{
+        } else {
             finish();
-            Toast.makeText(mContext,"获取商品详情数据失败！", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, "获取商品详情数据失败！", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -103,16 +113,16 @@ public class GoodsDetailsActivity extends BaseActivity {
         tvGoodPriceCurrent.setText(mGoodDetail.getCurrencyPrice());
         tvGoodPriceShop.setText(mGoodDetail.getShopPrice());
         mSlideAutoLoopView.startPlayLoop(mFlowIndicator,
-                getAlbumImageUrl(),getAlbumImageSize());
-        wvGoodBrief.loadDataWithBaseURL(null,mGoodDetail.getGoodsBrief(),I.TEXT_HTML,I.UTF_8,null);
+                getAlbumImageUrl(), getAlbumImageSize());
+        wvGoodBrief.loadDataWithBaseURL(null, mGoodDetail.getGoodsBrief(), I.TEXT_HTML, I.UTF_8, null);
     }
 
     private String[] getAlbumImageUrl() {
         String[] albumImageUrl = new String[]{};
-        if(mGoodDetail.getProperties()!=null && mGoodDetail.getProperties().length>0){
+        if (mGoodDetail.getProperties() != null && mGoodDetail.getProperties().length > 0) {
             AlbumsBean[] albums = mGoodDetail.getProperties()[0].getAlbums();
             albumImageUrl = new String[albums.length];
-            for (int i=0;i<albumImageUrl.length;i++){
+            for (int i = 0; i < albumImageUrl.length; i++) {
                 albumImageUrl[i] = albums[i].getImgUrl();
             }
         }
@@ -120,7 +130,7 @@ public class GoodsDetailsActivity extends BaseActivity {
     }
 
     private int getAlbumImageSize() {
-        if(mGoodDetail.getProperties()!=null && mGoodDetail.getProperties().length>0){
+        if (mGoodDetail.getProperties() != null && mGoodDetail.getProperties().length > 0) {
             return mGoodDetail.getProperties()[0].getAlbums().length;
         }
         return 0;
@@ -128,17 +138,6 @@ public class GoodsDetailsActivity extends BaseActivity {
 
     private void initView() {
         DisplayUtils.initBack(mContext);
-        ivShare = (ImageView) findViewById(R.id.iv_good_share);
-        ivCollect = (ImageView) findViewById(R.id.iv_good_collect);
-        ivCart = (ImageView) findViewById(R.id.iv_good_cart);
-        tvCartCount = (TextView) findViewById(R.id.tv_cart_count);
-        tvGoodEnglishName = (TextView) findViewById(R.id.tv_good_name_english);
-        tvGoodName = (TextView) findViewById(R.id.tv_good_name);
-        tvGoodPriceCurrent = (TextView) findViewById(R.id.tv_good_price_current);
-        tvGoodPriceShop = (TextView) findViewById(R.id.tv_good_price_shop);
-        mSlideAutoLoopView = (SlideAutoLoopView) findViewById(R.id.salv);
-        mFlowIndicator = (FlowIndicator) findViewById(R.id.indicator);
-        wvGoodBrief = (WebView) findViewById(R.id.wv_good_brief);
         WebSettings settings = wvGoodBrief.getSettings();
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         settings.setBuiltInZoomControls(false);
@@ -153,25 +152,25 @@ public class GoodsDetailsActivity extends BaseActivity {
 
     private void updateCartNum() {
         int count = Utils.sumCartCount();
-        Log.e(TAG,"count="+count);
-        if(!FuLiCenterApplication.getInstance().isLogined() || count ==0){
+        Log.e(TAG, "count=" + count);
+        if (!FuLiCenterApplication.getInstance().isLogined() || count == 0) {
             tvCartCount.setText(String.valueOf(0));
             tvCartCount.setVisibility(View.GONE);
-        }else{
+        } else {
             tvCartCount.setText(String.valueOf(count));
             tvCartCount.setVisibility(View.VISIBLE);
         }
     }
 
     private void initCollecStatus() {
-        if(FuLiCenterApplication.getInstance().isLogined()){
+        if (FuLiCenterApplication.getInstance().isLogined()) {
             String userName = FuLiCenterApplication.getInstance().getUserName();
             NetDao.isCollect(mContext, mGoodId, userName, new OkHttpUtils.OnCompleteListener<MessageBean>() {
                 @Override
                 public void onSuccess(MessageBean result) {
-                    if(result!=null && result.isSuccess()){
+                    if (result != null && result.isSuccess()) {
                         isCollect = true;
-                    }else{
+                    } else {
                         isCollect = false;
                     }
                     updateCollectStatus();
@@ -185,11 +184,11 @@ public class GoodsDetailsActivity extends BaseActivity {
         }
     }
 
-    class MyOnClickListener implements View.OnClickListener{
+    class MyOnClickListener implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.iv_good_collect:
                     goodColect();
                     break;
@@ -204,23 +203,23 @@ public class GoodsDetailsActivity extends BaseActivity {
     }
 
     private void addCart() {
-        Log.e(TAG,"addCart...");
+        Log.e(TAG, "addCart...");
         List<CartBean> cartList = FuLiCenterApplication.getInstance().getCartList();
         CartBean cart = new CartBean();
         boolean isExits = false;
-        for (CartBean cartBean:cartList){
-            if(cartBean.getGoodsId()==mGoodId){
+        for (CartBean cartBean : cartList) {
+            if (cartBean.getGoodsId() == mGoodId) {
                 cart.setId(cartBean.getId());
                 cart.setGoodsId(mGoodId);
                 cart.setChecked(cartBean.isChecked());
-                cart.setCount(cartBean.getCount()+1);
+                cart.setCount(cartBean.getCount() + 1);
                 cart.setGoods(mGoodDetail);
                 cart.setUserName(cartBean.getUserName());
                 isExits = true;
             }
         }
-        Log.e(TAG,"addCart...isExits="+isExits);
-        if(!isExits){
+        Log.e(TAG, "addCart...isExits=" + isExits);
+        if (!isExits) {
             cart.setGoodsId(mGoodId);
             cart.setChecked(true);
             cart.setCount(1);
@@ -232,60 +231,60 @@ public class GoodsDetailsActivity extends BaseActivity {
 
     //取消或者添加商品收藏
     private void goodColect() {
-        if(FuLiCenterApplication.getInstance().isLogined()){
-            if(isCollect){
+        if (FuLiCenterApplication.getInstance().isLogined()) {
+            if (isCollect) {
                 //取消收藏
                 NetDao.delCollect(mContext, mGoodId,
                         new OkHttpUtils.OnCompleteListener<MessageBean>() {
                             @Override
                             public void onSuccess(MessageBean result) {
-                                if(result!=null && result.isSuccess()){
+                                if (result != null && result.isSuccess()) {
                                     isCollect = false;
 //                                    new DownloadCollectCountTask(mContext,FuLiCenterApplication.getInstance().getUserName()).execute();
                                     sendStickyBroadcast(new Intent("update_collect_list"));
-                                }else{
-                                    Log.e(TAG,"delete fail");
+                                } else {
+                                    Log.e(TAG, "delete fail");
                                 }
                                 updateCollectStatus();
-                                Toast.makeText(mContext,result.getMsg(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, result.getMsg(), Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
                             public void onError(String error) {
-                                L.e(TAG,"error="+error);
+                                L.e(TAG, "error=" + error);
                             }
                         });
-            }else{
+            } else {
                 //添加收藏
                 NetDao.addCollect(mContext, mGoodDetail, new OkHttpUtils.OnCompleteListener<MessageBean>() {
                     @Override
                     public void onSuccess(MessageBean result) {
-                        if(result!=null && result.isSuccess()){
-                            isCollect  = true;
+                        if (result != null && result.isSuccess()) {
+                            isCollect = true;
 //                            new DownloadCollectCountTask(mContext,FuLiCenterApplication.getInstance().getUserName()).execute();
                             sendStickyBroadcast(new Intent("update_collect_list"));
-                        }else{
-                            Log.e(TAG,"delete fail");
+                        } else {
+                            Log.e(TAG, "delete fail");
                         }
                         updateCollectStatus();
-                        Toast.makeText(mContext,result.getMsg(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, result.getMsg(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(String error) {
-                        L.e(TAG,"error="+error);
+                        L.e(TAG, "error=" + error);
                     }
                 });
             }
-        }else{
+        } else {
 //            startActivity(new Intent(mContext,LoginActivity.class));
         }
     }
 
-    private void updateCollectStatus(){
-        if(isCollect){
+    private void updateCollectStatus() {
+        if (isCollect) {
             ivCollect.setImageResource(R.mipmap.bg_collect_out);
-        }else{
+        } else {
             ivCollect.setImageResource(R.mipmap.bg_collect_in);
         }
     }
@@ -298,17 +297,17 @@ public class GoodsDetailsActivity extends BaseActivity {
         }
     }
 
-    private void setUpdateCartCountListener(){
+    private void setUpdateCartCountListener() {
         mReceiver = new updateCartNumReceiver();
         IntentFilter filter = new IntentFilter("update_cart_list");
-        registerReceiver(mReceiver,filter);
+        registerReceiver(mReceiver, filter);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         OkHttpUtils.release();
-        if(mReceiver!=null){
+        if (mReceiver != null) {
             unregisterReceiver(mReceiver);
         }
     }
