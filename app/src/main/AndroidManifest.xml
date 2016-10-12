@@ -30,6 +30,9 @@
         <activity android:name=".activity.GoodsDetailsActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".activity.BoutiqueChildActivity"
+                  android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

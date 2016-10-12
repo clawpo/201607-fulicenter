@@ -100,19 +100,23 @@ public class ImageLoader {
         mHandler = new Handler(){
             @Override
             public void handleMessage(Message msg) {
-                ImageBean bean= (ImageBean) msg.obj;
-                switch (msg.what) {
-                    case DOWNLOAD_ERROR:
-                        if (bean.listener != null) {
-                            bean.listener.onError(bean.error);
-                        } else {
-                            Log.e("main", bean.error);
-                        }
-                        break;
-                    case DOWNLOAD_SUCCESS:
-                        if(bean.listener!=null)
-                            bean.listener.onSuccess(mBean.url,mBean.bitmap);
-                        break;
+                try {
+                    ImageBean bean= (ImageBean) msg.obj;
+                    switch (msg.what) {
+                        case DOWNLOAD_ERROR:
+                            if (bean.listener != null) {
+                                bean.listener.onError(bean.error);
+                            } else {
+                                Log.e("main", bean.error);
+                            }
+                            break;
+                        case DOWNLOAD_SUCCESS:
+                            if(bean.listener!=null)
+                                bean.listener.onSuccess(mBean.url,mBean.bitmap);
+                            break;
+                    }
+                }catch (Exception e){
+                    L.e("exception","e="+e.getMessage());
                 }
             }
         };
