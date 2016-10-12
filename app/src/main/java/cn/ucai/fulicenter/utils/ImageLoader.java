@@ -110,7 +110,8 @@ public class ImageLoader {
                         }
                         break;
                     case DOWNLOAD_SUCCESS:
-                        bean.listener.onSuccess(mBean.url,mBean.bitmap);
+                        if(bean.listener!=null)
+                            bean.listener.onSuccess(mBean.url,mBean.bitmap);
                         break;
                 }
             }
