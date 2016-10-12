@@ -104,8 +104,7 @@ public class ImageLoader {
                 switch (msg.what) {
                     case DOWNLOAD_ERROR:
                         if (bean.listener != null) {
-                            L.e("bean.error="+bean.error);
-                            bean.listener.onError(bean.error!=null?bean.error:"");
+                            bean.listener.onError(bean.error);
                         } else {
                             Log.e("main", bean.error);
                         }
@@ -245,7 +244,7 @@ public class ImageLoader {
      */
     public ImageLoader listener(final ViewGroup parent) {
         if (parent != null) {
-            mBean.listener = new OnImageLoadListener() {//设置下载完成后处理的代码
+            mBean.listener = new ImageLoader.OnImageLoadListener() {//设置下载完成后处理的代码
                 @Override
                 public void onSuccess(String url, Bitmap bitmap) {
                     //从RecyclerView中搜索tag值是url的ImageView
@@ -257,7 +256,13 @@ public class ImageLoader {
 
                 @Override
                 public void onError(String error) {
-                    Log.i("main", error);
+                    if (error == null) {
+                        mBean.error = "图片加载失败";
+                    }
+                    Message msg = Message.obtain();
+                    msg.obj=error;
+                    msg.arg1=DOWNLOAD_ERROR;
+                    mHandler.sendMessage(msg);
                 }
 
             };
