@@ -409,25 +409,11 @@ public interface I {
     String REQUEST_FIND_CHARGE = "findCharge";
     /** 支付请求*/
     String REQUEST_PAY="pay";
+    /** 下载图片的请求*/
+    String REQUEST_DOWNLOAD_IMAGE="downloadImage";
 
     /** 下载精选首页图像的接口*/
-    String DOWNLOAD_BOUTIQUE_IMG_URL= I.SERVER_ROOT+
-            REQUEST_DOWNLOAD_BOUTIQUE_IMG+I.QUESTION+ IMAGE_URL+"=";
-
-    /** 下载商品相册图像的接口*/
-    String DOWNLOAD_ALBUM_IMG_URL= I.SERVER_ROOT+
-            REQUEST_DOWNLOAD_ALBUM_IMG+I.QUESTION+ IMAGE_URL+"=";
-
-    /** 下载分类中大类图像的接口*/
-    String DOWNLOAD_CATEGORY_GROUP_IMG_URL= I.SERVER_ROOT+
-            REQUEST_DOWNLOAD_CATEGORY_GROUP_IMAGE+I.QUESTION+ IMAGE_URL+"=";
-
-    /** 下载分类中小类图像的接口*/
-    String DOWNLOAD_CATEGORY_CHILD_IMG_URL= I.SERVER_ROOT+
-            REQUEST_DOWNLOAD_CATEGORY_CHILD_IMAGE+I.QUESTION+ IMAGE_URL+"=";
-
-    /** 下载商品图像的接口*/
-    String DOWNLOAD_GOODS_IMG_URL= I.SERVER_ROOT+
-            REQUEST_DOWNLOAD_GOODS_THUMB+I.QUESTION+ IMAGE_URL+"=";
+    String DOWNLOAD_IMG_URL= I.SERVER_ROOT+
+            REQUEST_DOWNLOAD_IMAGE+I.QUESTION+ IMAGE_URL+"=";
 
 }

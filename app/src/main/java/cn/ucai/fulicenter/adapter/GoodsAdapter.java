@@ -104,7 +104,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         holder.tvGoodsPrice.setText(goods.getCurrencyPrice());
         holder.tvGoodsName.setText(goods.getGoodsName());
 
-        ImageLoader.downloadBoutiqueImg(mContext,holder.ivGoodsThumb,
+        ImageLoader.downloadImg(mContext,holder.ivGoodsThumb,
                 goods.getGoodsThumb(),mScrollState!=RecyclerView.SCROLL_STATE_DRAGGING);
         //给单击事件监听对象传递数据
         holder.layoutItem.setTag(goods.getGoodsId());
