@@ -57,7 +57,6 @@
             android:id="@+id/tv_good_name_english"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="tv_good_name_english"
             android:layout_margin="5dp"
             android:textColor="@color/black"/>
         <TextView
@@ -66,7 +65,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="tv_good_name"
             android:textColor="@color/black" />
         <TextView
             android:id="@+id/tv_good_price_shop"
@@ -74,7 +72,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_alignParentRight="true"
-            android:text="tv_good_price_shop"
             android:textColor="@color/good_detail_currency_price" />
         <TextView
             android:id="@+id/tv_good_price_current"
@@ -83,7 +80,6 @@
             android:layout_margin="5dp"
             android:layout_below="@+id/tv_good_price_shop"
             android:layout_alignParentRight="true"
-            android:text="tv_good_price_current"
             android:textColor="@color/good_detail_currency_price" />
         <RelativeLayout
             android:id="@+id/layout_image"
