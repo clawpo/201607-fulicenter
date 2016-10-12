@@ -12,6 +12,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import cn.ucai.fulicenter.R;
 import cn.ucai.fulicenter.fragment.BoutiqueFragment;
+import cn.ucai.fulicenter.fragment.CategoryFragment;
 import cn.ucai.fulicenter.fragment.NewGoodsFragment;
 
 public class MainActivity extends BaseActivity {
@@ -34,7 +35,7 @@ public class MainActivity extends BaseActivity {
 
     NewGoodsFragment mNewGoodFragment;
     BoutiqueFragment mBoutiqueFragment;
-//    CategoryFragment mCategoryFragment;
+    CategoryFragment mCategoryFragment;
 //    CartFragment mCartFragment;
 //    PersonalCenterFragment mPersonalCenterFragment;
 
@@ -56,9 +57,9 @@ public class MainActivity extends BaseActivity {
                 .beginTransaction()
                 .add(R.id.fragment_container, mNewGoodFragment)
                 .add(R.id.fragment_container,mBoutiqueFragment)
-//                .add(R.id.fragment_container,mCategoryFragment)
+                .add(R.id.fragment_container,mCategoryFragment)
                 .hide(mBoutiqueFragment)
-//              .hide(mCategoryFragment)
+              .hide(mCategoryFragment)
                 .show(mNewGoodFragment)
                 .commit();
     }
@@ -70,13 +71,13 @@ public class MainActivity extends BaseActivity {
     private void initFragment() {
         mNewGoodFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
-//        mCategoryFragment = new CategoryFragment();
+        mCategoryFragment = new CategoryFragment();
 //        mCartFragment = new CartFragment();
 //        mPersonalCenterFragment = new PersonalCenterFragment();
         mFragment = new Fragment[5];
         mFragment[0] = mNewGoodFragment;
         mFragment[1] = mBoutiqueFragment;
-//        mFragment[2] = mCategoryFragment;
+        mFragment[2] = mCategoryFragment;
 //        mFragment[3] = mCartFragment;
 //        mFragment[4] = mPersonalCenterFragment;
     }
