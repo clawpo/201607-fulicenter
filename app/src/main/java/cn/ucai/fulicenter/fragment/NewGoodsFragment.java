@@ -148,6 +148,8 @@ public class NewGoodsFragment extends Fragment {
 
             @Override
             public void onError(String error) {
+                mSwipeRefreshLayout.setRefreshing(false);
+                mtvRefreshHint.setVisibility(View.GONE);
                 Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
             }
         });

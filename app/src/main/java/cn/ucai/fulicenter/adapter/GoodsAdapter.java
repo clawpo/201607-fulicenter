@@ -1,6 +1,7 @@
 package cn.ucai.fulicenter.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import java.util.Comparator;
 
 import cn.ucai.fulicenter.I;
 import cn.ucai.fulicenter.R;
+import cn.ucai.fulicenter.activity.GoodsDetailsActivity;
 import cn.ucai.fulicenter.bean.NewGoodsBean;
 import cn.ucai.fulicenter.utils.ImageLoader;
 import cn.ucai.fulicenter.views.FooterViewHolder;
@@ -30,15 +32,15 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         this.mContext = context;
         this.mGoodsList= new ArrayList<>();
         this.mGoodsList.addAll(goodsList);
-//        //列表项单击事件监听对象只需创建一个
-//        mOnItemClickListener=new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                int goodsId= (int) v.getTag();
-//                mContext.startActivity(new Intent(mContext, GoodsDetailsActivity.class)
-//                .putExtra(I.GoodsDetails.KEY_GOODS_ID,goodsId));
-//            }
-//        };
+        //列表项单击事件监听对象只需创建一个
+        mOnItemClickListener=new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int goodsId= (int) v.getTag();
+                mContext.startActivity(new Intent(mContext, GoodsDetailsActivity.class)
+                .putExtra(I.GoodsDetails.KEY_GOODS_ID,goodsId));
+            }
+        };
 
         sortBy = I.SORT_BY_ADDTIME_DESC;
         soryBy();
